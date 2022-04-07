@@ -14,7 +14,9 @@ struct TechChallengeApp: App {
         WindowGroup {
             TabView {
                 NavigationView {
-                    TransactionListView()
+                    VStack {
+                        TransactionListView()
+                    }
                 }
                 .tabItem {
                     Label("Transactions", systemImage: "list.bullet")

@@ -8,18 +8,42 @@
 import SwiftUI
 
 struct TransactionListView: View {
+    @State var filter: String?
+    
+    private static var allCategory = CategoryModel(category: "all", color: .black)
+     
     let transactions: [TransactionModel] = ModelData.sampleTransactions
+    let categories: [CategoryModel] =  [TransactionListView.allCategory] +
+    TransactionModel.Category.allCases.map({ CategoryModel(category: $0.rawValue, color: $0.color) })
     
     var body: some View {
-        List {
-            ForEach(transactions) { transaction in
-                TransactionView(transaction: transaction)
+        VStack {
+            ZStack {
+                Color.accentColor.opacity(0.8)
+                ScrollView(.horizontal) {
+                    HStack(spacing: 5) {
+                        ForEach(categories, id: \.id) { item in
+                            CategoryView(category: item) {
+                                self.filter = item.category
+                            }
+                        }
+                    }.padding()
+                }
+            }.frame(height: 50)
+            
+            List {
+                ForEach(transactions.filter({
+                    guard let filter = $filter.wrappedValue, filter != TransactionListView.allCategory.category else { return true }
+                    return $0.category.rawValue == filter
+                })) { transaction in
+                    TransactionView(transaction: transaction)
+                }
             }
+            .animation(.easeIn)
+            .listStyle(PlainListStyle())
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Transactions")
         }
-        .animation(.easeIn)
-        .listStyle(PlainListStyle())
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Transactions")
     }
 }
 

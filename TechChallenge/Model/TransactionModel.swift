@@ -5,7 +5,7 @@
 //  Created by Adrian Tineo Cabello on 27/7/21.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - TransactionModel
 
