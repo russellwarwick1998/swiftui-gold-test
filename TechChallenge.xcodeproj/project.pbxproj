@@ -137,6 +137,8 @@
 		3CE226C826B2E42800B3D085 /* TransactionList */ = {
 			isa = PBXGroup;
 			children = (
+				BC31B4AC27FFAC2D00CD92E5 /* Floating View */,
+				BC31B4A727FF84D700CD92E5 /* Categories View */,
 				3CE226B826B0548C00B3D085 /* TransactionView.swift */,
 				3CE226B426B0523C00B3D085 /* TransactionListView.swift */,
 			);
@@ -147,8 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				3CE2268326B007D200B3D085 /* TechChallengeApp.swift */,
-				BC31B4AC27FFAC2D00CD92E5 /* Floating View */,
-				BC31B4A727FF84D700CD92E5 /* Categories View */,
 				3CE226CB26B2E44E00B3D085 /* Insights */,
 				3CE226C826B2E42800B3D085 /* TransactionList */,
 				3CE226CC26B2E47300B3D085 /* Shared */,
