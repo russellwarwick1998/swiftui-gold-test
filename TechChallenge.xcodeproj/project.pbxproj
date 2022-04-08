@@ -27,6 +27,7 @@
 		3CE226C726B2E41E00B3D085 /* InsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE226C626B2E41E00B3D085 /* InsightsView.swift */; };
 		BC31B4A927FF84E700CD92E5 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31B4A827FF84E700CD92E5 /* CategoryView.swift */; };
 		BC31B4AB27FF868600CD92E5 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31B4AA27FF868600CD92E5 /* CategoriesView.swift */; };
+		BC31B4AE27FFAC4600CD92E5 /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31B4AD27FFAC4600CD92E5 /* FloatingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		3CE226C626B2E41E00B3D085 /* InsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsView.swift; sourceTree = "<group>"; };
 		BC31B4A827FF84E700CD92E5 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		BC31B4AA27FF868600CD92E5 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		BC31B4AD27FFAC4600CD92E5 /* FloatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				3CE2268326B007D200B3D085 /* TechChallengeApp.swift */,
+				BC31B4AC27FFAC2D00CD92E5 /* Floating View */,
 				BC31B4A727FF84D700CD92E5 /* Categories View */,
 				3CE226CB26B2E44E00B3D085 /* Insights */,
 				3CE226C826B2E42800B3D085 /* TransactionList */,
@@ -200,6 +203,14 @@
 				BC31B4AA27FF868600CD92E5 /* CategoriesView.swift */,
 			);
 			path = "Categories View";
+			sourceTree = "<group>";
+		};
+		BC31B4AC27FFAC2D00CD92E5 /* Floating View */ = {
+			isa = PBXGroup;
+			children = (
+				BC31B4AD27FFAC4600CD92E5 /* FloatingView.swift */,
+			);
+			path = "Floating View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +329,7 @@
 				3CE226BB26B0573C00B3D085 /* Date.swift in Sources */,
 				3CE226C726B2E41E00B3D085 /* InsightsView.swift in Sources */,
 				3CE226BF26B05EB100B3D085 /* ViewModifiers.swift in Sources */,
+				BC31B4AE27FFAC4600CD92E5 /* FloatingView.swift in Sources */,
 				3C296ECF26B31193006DF667 /* Angle.swift in Sources */,
 				BC31B4A927FF84E700CD92E5 /* CategoryView.swift in Sources */,
 				3C3FCAAD26C57A7D0092AB11 /* TransactionModel+UI.swift in Sources */,
@@ -508,7 +520,7 @@
 				DEVELOPMENT_TEAM = WDVRK9UE68;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TechChallenge/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -530,7 +542,7 @@
 				DEVELOPMENT_TEAM = WDVRK9UE68;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TechChallenge/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

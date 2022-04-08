@@ -14,20 +14,18 @@ struct TransactionListView: View {
     var body: some View {
         ZStack {
             VStack {
-                CategoriesView(categories: viewModel.categories) { filter in
-                    viewModel.filter = filter
-                }
-                
+                CategoriesView(categories: viewModel.categories) { viewModel.categorySelected = $0 }
                 List {
-                    ForEach(viewModel.transactions) { transaction in
-                        TransactionView(transaction: transaction)
-                    }
+                    ForEach(viewModel.transactions) { TransactionView(transaction: $0) }
                     Spacer(minLength: 100)
                 }
-                .animation(.easeIn)
                 .listStyle(PlainListStyle())
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Transactions")
+            }
+            VStack {
+                Spacer()
+                FloatingView(total: viewModel.categoryTotal, category: viewModel.categorySelected).frame(height: 100)
             }
         }
     }
@@ -37,17 +35,25 @@ extension TransactionListView {
     class ViewModel: ObservableObject {
         
         @Published var transactions: [TransactionModel] = ModelData.sampleTransactions
-        @Published var filter: String? = nil {
+        @Published var categoryTotal: Double = ModelData.sampleTransactions.map({ $0.amount }).reduce(0, +)
+        
+        // MARK: -
+        
+        static let allCategory = CategoryModel(category: "all", color: .black)
+
+        var categorySelected: CategoryModel = ViewModel.allCategory {
             didSet {
-                transactions = ModelData.sampleTransactions.filter {
-                    guard let filter = filter else { return true }
-                    return $0.category.rawValue == filter
+                let filteredTransactions = ModelData.sampleTransactions.filter {
+                    guard categorySelected.category != "all" else { return true }
+                    return $0.category.rawValue == categorySelected.category
                 }
+                transactions = filteredTransactions
+                categoryTotal = filteredTransactions.map({ $0.amount }).reduce(0, +)
             }
         }
-        
+
         var categories: [CategoryModel] {
-            [CategoryModel(category: "all", color: .black)] +
+            [ViewModel.allCategory] +
             TransactionModel.Category.allCases.map({ CategoryModel(category: $0.rawValue, color: $0.color) })
         }
     }

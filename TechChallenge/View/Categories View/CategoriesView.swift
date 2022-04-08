@@ -15,7 +15,7 @@ struct CategoryModel: Identifiable {
 
 struct CategoriesView: View {
     @State var categories: [CategoryModel]
-    var updateFilter: (String?) -> Void
+    var updateFilter: (CategoryModel) -> Void
     
     var body: some View {
         ZStack {
@@ -24,7 +24,7 @@ struct CategoriesView: View {
                 HStack(spacing: 5) {
                     ForEach(categories, id: \.id) { item in
                         CategoryView(category: item) {
-                            self.updateFilter((item.category == "all") ? nil : item.category)
+                            self.updateFilter(item)
                         }
                     }
                 }.padding()
