@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TransactionView: View {
+    @State private var isPinned: Bool = false
     let transaction: TransactionModel
     
     var body: some View {
@@ -17,6 +18,11 @@ struct TransactionView: View {
                     .font(.headline)
                     .foregroundColor(transaction.category.color)
                 Spacer()
+                Button {
+                    isPinned.toggle()
+                } label: {
+                    Image(systemName: isPinned ? "pin.slash.fill" : "pin.fill")
+                }
             }
             
             HStack {
