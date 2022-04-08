@@ -25,30 +25,32 @@ struct TransactionView: View {
                 }
             }
             
-            HStack {
-                transaction.image
-                    .resizable()
-                    .frame(
-                        width: 60.0,
-                        height: 60.0,
-                        alignment: .top
-                    )
-                
-                VStack(alignment: .leading) {
-                    Text(transaction.name)
-                        .secondary()
-                    Text(transaction.accountName)
-                        .tertiary()
-                }
-                
-                Spacer()
-                
-                VStack(alignment: .trailing) {
-                    Text("$\(transaction.amount.formatted())")
-                        .bold()
-                        .secondary()
-                    Text(transaction.date.formatted)
-                        .tertiary()
+            if !isPinned {
+                HStack {
+                    transaction.image
+                        .resizable()
+                        .frame(
+                            width: 60.0,
+                            height: 60.0,
+                            alignment: .top
+                        )
+                    
+                    VStack(alignment: .leading) {
+                        Text(transaction.name)
+                            .secondary()
+                        Text(transaction.accountName)
+                            .tertiary()
+                    }
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .trailing) {
+                        Text("$\(transaction.amount.formatted())")
+                            .bold()
+                            .secondary()
+                        Text(transaction.date.formatted)
+                            .tertiary()
+                    }
                 }
             }
         }
