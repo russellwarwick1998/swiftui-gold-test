@@ -8,31 +8,47 @@
 import SwiftUI
 
 struct TransactionListView: View {
-    @State var filter: String?
     
-    let transactions: [TransactionModel] = ModelData.sampleTransactions
-    
+    @StateObject private var viewModel = ViewModel()
+        
     var body: some View {
-        VStack {
-            
-            CategoriesView { filter in
-                self.filter = filter
+        ZStack {
+            VStack {
+                CategoriesView(categories: viewModel.categories) { filter in
+                    viewModel.filter = filter
+                }
+                
+                List {
+                    ForEach(viewModel.transactions) { transaction in
+                        TransactionView(transaction: transaction)
+                    }
+                    Spacer(minLength: 100)
+                }
+                .animation(.easeIn)
+                .listStyle(PlainListStyle())
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Transactions")
             }
-            
-            List {
-                ForEach(transactions.filter({
-                    guard let filter = $filter.wrappedValue else { return true }
+        }
+    }
+}
+
+extension TransactionListView {
+    class ViewModel: ObservableObject {
+        
+        @Published var transactions: [TransactionModel] = ModelData.sampleTransactions
+        @Published var filter: String? = nil {
+            didSet {
+                transactions = ModelData.sampleTransactions.filter {
+                    guard let filter = filter else { return true }
                     return $0.category.rawValue == filter
-                })) { transaction in
-                    TransactionView(transaction: transaction)
                 }
             }
-            .animation(.easeIn)
-            .listStyle(PlainListStyle())
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Transactions")
-            
-      
+        }
+        
+        var categories: [CategoryModel] {
+            [CategoryModel(category: "all", color: .black)] +
+            TransactionModel.Category.allCases.map({ CategoryModel(category: $0.rawValue, color: $0.color) })
         }
     }
 }

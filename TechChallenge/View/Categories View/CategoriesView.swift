@@ -14,10 +14,8 @@ struct CategoryModel: Identifiable {
 }
 
 struct CategoriesView: View {
-    
+    @State var categories: [CategoryModel]
     var updateFilter: (String?) -> Void
-    let categories: [CategoryModel] = [CategoryModel(category: "all", color: .black)] +
-    TransactionModel.Category.allCases.map({ CategoryModel(category: $0.rawValue, color: $0.color) })
     
     var body: some View {
         ZStack {
