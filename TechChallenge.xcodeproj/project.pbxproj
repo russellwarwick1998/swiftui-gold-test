@@ -27,6 +27,7 @@
 		3CE226C726B2E41E00B3D085 /* InsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE226C626B2E41E00B3D085 /* InsightsView.swift */; };
 		BC31B4AB27FF868600CD92E5 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31B4AA27FF868600CD92E5 /* CategoriesView.swift */; };
 		BC31B4AE27FFAC4600CD92E5 /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31B4AD27FFAC4600CD92E5 /* FloatingView.swift */; };
+		BC31B4B02801ECA300CD92E5 /* RUSSELLWARWICK-NOTES.md in Resources */ = {isa = PBXBuildFile; fileRef = BC31B4AF2801ECA300CD92E5 /* RUSSELLWARWICK-NOTES.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		3CE226C626B2E41E00B3D085 /* InsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsView.swift; sourceTree = "<group>"; };
 		BC31B4AA27FF868600CD92E5 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		BC31B4AD27FFAC4600CD92E5 /* FloatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingView.swift; sourceTree = "<group>"; };
+		BC31B4AF2801ECA300CD92E5 /* RUSSELLWARWICK-NOTES.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "RUSSELLWARWICK-NOTES.md"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		3CE2268226B007D200B3D085 /* TechChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				BC31B4AF2801ECA300CD92E5 /* RUSSELLWARWICK-NOTES.md */,
 				3C3FCAAE26C57C650092AB11 /* README.md */,
 				3CE226C926B2E43000B3D085 /* View */,
 				3CE226CA26B2E43B00B3D085 /* Model */,
@@ -299,6 +302,7 @@
 			files = (
 				3C3FCAAF26C57C650092AB11 /* README.md in Resources */,
 				3CE2268B26B007D300B3D085 /* Preview Assets.xcassets in Resources */,
+				BC31B4B02801ECA300CD92E5 /* RUSSELLWARWICK-NOTES.md in Resources */,
 				3CE2268826B007D300B3D085 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
