@@ -6,27 +6,51 @@
 //
 
 import XCTest
+@testable import TechChallenge
 
 class TechChallengeTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    func test_filteredCategories_whenAll_returnAllTransactions() {
+        let sut = TransactionListView.ViewModel(transactions: ModelData.sampleTransactions)
+        sut.categorySelected = .all
+        let allCategories = TransactionModel.Category.allCases.map({ $0.rawValue })
+        XCTAssert(sut.filteredTransactions.contains(where: { allCategories.contains($0.category.rawValue) }))
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func test_filteredCategories_whenEntertainment_returnOnlyEntertainmentTransactions() {
+        let sut = TransactionListView.ViewModel(transactions: ModelData.sampleTransactions)
+        sut.categorySelected = CategoryModel(category: .entertainment)
+        XCTAssert(sut.filteredTransactions.contains(where: { $0.category.rawValue == "entertainment" }))
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func test_filteredCategories_whenEntertainment_shouldNotContainFood() {
+        let sut = TransactionListView.ViewModel(transactions: ModelData.sampleTransactions)
+        sut.categorySelected = CategoryModel(category: .entertainment)
+        XCTAssertFalse(sut.filteredTransactions.contains(where: { $0.category.rawValue == "food" }))
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_totalAmount_whenAllSelected_showCorrectAmount() {
+        let sut = TransactionListView.ViewModel(transactions: ModelData.sampleTransactions)
+        sut.categorySelected = .all
+        XCTAssertEqual(sut.categoryTotal, 472.08, accuracy: 0.01)
     }
-
+    
+    func test_totalAmount_whenFoodSelected_showCorrectAmount() {
+        let sut = TransactionListView.ViewModel(transactions: ModelData.sampleTransactions)
+        sut.categorySelected = CategoryModel(category: .food)
+        XCTAssertEqual(sut.categoryTotal, 74.28, accuracy: 0.01)
+    }
+    
+    func test_totalAmount_whenEntertainmentNotPresent_showZero() {
+        let transactions = ModelData.sampleTransactions.filter({ $0.category.rawValue != "entertainment" })
+        let sut = TransactionListView.ViewModel(transactions: transactions)
+        sut.categorySelected = CategoryModel(category: .entertainment)
+        XCTAssertEqual(sut.categoryTotal, 0.0, accuracy: 0.01)
+    }
+    
+    func test_totalAmount_whenNoData_showZero() {
+        let sut = TransactionListView.ViewModel(transactions: [])
+        sut.categorySelected = .all
+        XCTAssertEqual(sut.categoryTotal, 0.0, accuracy: 0.01)
+    }
 }

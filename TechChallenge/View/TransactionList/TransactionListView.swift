@@ -9,14 +9,14 @@ import SwiftUI
 
 struct TransactionListView: View {
     
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel = ViewModel(transactions: ModelData.sampleTransactions)
         
     var body: some View {
         ZStack {
             VStack {
                 CategoriesView(categories: viewModel.categories) { viewModel.categorySelected = $0 }
                 List {
-                    ForEach(viewModel.transactions) { TransactionView(transaction: $0) }
+                    ForEach(viewModel.filteredTransactions) { TransactionView(transaction: $0) }
                     Spacer(minLength: 100)
                 }
                 .listStyle(PlainListStyle())
@@ -34,19 +34,26 @@ struct TransactionListView: View {
 extension TransactionListView {
     class ViewModel: ObservableObject {
         
-        @Published var transactions: [TransactionModel] = ModelData.sampleTransactions
+        init(transactions: [TransactionModel]) {
+            self.transactions = transactions
+            self.filteredTransactions = transactions
+        }
+        
+        private let transactions: [TransactionModel]
+        
+        @Published var filteredTransactions: [TransactionModel]
         @Published var categoryTotal: Double = ModelData.sampleTransactions.map({ $0.amount }).reduce(0, +)
         
         // MARK: -
         
         var categorySelected: CategoryModel = CategoryModel.all {
             didSet {
-                let filteredTransactions = ModelData.sampleTransactions.filter {
+                let filteredTransactions = transactions.filter {
                     guard let category = categorySelected.category else { return true }
                     return $0.category.rawValue == category
                 }
-                transactions = filteredTransactions
-                categoryTotal = filteredTransactions.map({ $0.amount }).reduce(0, +)
+                self.filteredTransactions = filteredTransactions
+                self.categoryTotal = filteredTransactions.map({ $0.amount }).reduce(0, +)
             }
         }
 
