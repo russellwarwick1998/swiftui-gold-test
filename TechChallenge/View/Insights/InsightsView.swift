@@ -9,10 +9,11 @@ import SwiftUI
 
 struct InsightsView: View {
     let transactions: [TransactionModel] = ModelData.sampleTransactions
+    let viewModel: InsightsView.ViewModel
     
     var body: some View {
         List {
-            RingView(transactions: transactions)
+            RingView(viewModel: viewModel)
                 .scaledToFit()
             
             ForEach(TransactionModel.Category.allCases) { category in
@@ -22,7 +23,7 @@ struct InsightsView: View {
                         .foregroundColor(category.color)
                     Spacer()
                     // TODO: calculate cummulative expense for each category
-                    Text("$0.0")
+                    Text(viewModel.getTotalForCategory(category: category.rawValue), format: .currency(code: "USD"))
                         .bold()
                         .secondary()
                 }
@@ -33,10 +34,31 @@ struct InsightsView: View {
     }
 }
 
+extension InsightsView {
+    class ViewModel: ObservableObject {
+        
+        init(transactions: [TransactionModel]) {
+            self.transactions = transactions
+        }
+        
+        let transactions: [TransactionModel]
+        
+        func getRatioForCategory(category: String) -> Double {
+            let all = transactions.map{ $0.amount }.reduce(0, +)
+            let filtered = transactions.filter { $0.category.rawValue == category}.map { $0.amount }.reduce(0, +)
+            return filtered/all
+        }
+        
+        func getTotalForCategory(category: String) -> Double {
+            transactions.filter { $0.category.rawValue == category}.map { $0.amount }.reduce(0, +)
+        }
+    }
+}
+
 #if DEBUG
 struct InsightsView_Previews: PreviewProvider {
     static var previews: some View {
-        InsightsView()
+        InsightsView(viewModel: InsightsView.ViewModel(transactions: ModelData.sampleTransactions))
             .previewLayout(.sizeThatFits)
     }
 }

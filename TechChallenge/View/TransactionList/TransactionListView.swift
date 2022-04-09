@@ -39,13 +39,11 @@ extension TransactionListView {
         
         // MARK: -
         
-        static let allCategory = CategoryModel(category: "all", color: .black)
-
-        var categorySelected: CategoryModel = ViewModel.allCategory {
+        var categorySelected: CategoryModel = CategoryModel.all {
             didSet {
                 let filteredTransactions = ModelData.sampleTransactions.filter {
-                    guard categorySelected.category != "all" else { return true }
-                    return $0.category.rawValue == categorySelected.category
+                    guard let category = categorySelected.category else { return true }
+                    return $0.category.rawValue == category
                 }
                 transactions = filteredTransactions
                 categoryTotal = filteredTransactions.map({ $0.amount }).reduce(0, +)
@@ -53,8 +51,8 @@ extension TransactionListView {
         }
 
         var categories: [CategoryModel] {
-            [ViewModel.allCategory] +
-            TransactionModel.Category.allCases.map({ CategoryModel(category: $0.rawValue, color: $0.color) })
+            [CategoryModel.all] +
+            TransactionModel.Category.allCases.map({ CategoryModel(category: $0) })
         }
     }
 }

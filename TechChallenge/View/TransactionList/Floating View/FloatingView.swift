@@ -18,7 +18,7 @@ struct FloatingView: View {
             VStack {
                 HStack {
                     Spacer()
-                    Text(category.category)
+                    Text(category.title)
                         .font(.headline)
                         .foregroundColor(category.color)
                 }
